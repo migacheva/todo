@@ -1,6 +1,8 @@
+package ru.kovalchuk;
+
 import java.util.Scanner;
 
-public class main {
+public class Main {
     public static void main(String[] args) {
         int iter = 1;
         String in_progress = ". [-] "; // задача не выполнена
@@ -28,24 +30,24 @@ public class main {
             if (cmd.equals("add")) {
                 System.out.print("Введите название задачи:  ");
                 String task_name = in.nextLine();
-                iter = helper.add_value_in_todo(iter, list_task, in_progress, task_name);
+                iter = Helper.add_value_in_todo(iter, list_task, in_progress, task_name);
             }
             if (cmd.equals("print")) {
-                if (!helper.check_exist_task(list_task))
+                if (!Helper.check_exist_task(list_task))
                 {
-                    helper.print_in_progress_tasks(in_progress, list_task);
+                    Helper.print_in_progress_tasks(in_progress, list_task);
                 }
             }
             if (cmd.equals("print [all]"))  {
-                if (!helper.check_exist_task(list_task)) {
-                    helper.print_all_tasks(list_task);
+                if (!Helper.check_exist_task(list_task)) {
+                    Helper.print_all_tasks(list_task);
                 }
             }
             if (cmd.equals("toggle")) {
-                if (!helper.check_exist_task(list_task)) {
-                    System.out.println("Введите id задачи: ");
-                    Integer id_task = in.nextInt();
-                    helper.toggle_task(in_progress, done, list_task, id_task);
+                if (!Helper.check_exist_task(list_task)) {
+                    System.out.print("Введите id задачи: ");
+                    Integer id_task = Integer.parseInt(in.nextLine());
+                    Helper.toggle_task(in_progress, done, list_task, id_task);
                 }
             }
             if (cmd.equals("bonus")) {

@@ -1,4 +1,6 @@
-public class helper {
+package ru.kovalchuk;
+
+public class Helper {
     static boolean check_exist_task(String[][] list_task) {
         if (list_task[1][0].equals("")){
             System.out.println("Не найдено ни одной задачи");
