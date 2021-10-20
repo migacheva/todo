@@ -2,9 +2,9 @@ public class Helper {
     static boolean check_exist_task(String[][] list_task) {
         if (list_task[1][0].equals("")){
             System.out.println("Не найдено ни одной задачи");
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     static void toggle_task(String in_progress, String done, String[][] list_task, Integer id_task) {
