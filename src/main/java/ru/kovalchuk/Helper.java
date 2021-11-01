@@ -1,66 +1,127 @@
 package ru.kovalchuk;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.List;
+
+
 public class Helper {
-    static boolean check_exist_task(String[][] list_task) {
-        if (list_task[1][0].equals("")){
+    private static final String in_progress = ". [ ] "; // задача не выполнена
+    private static final String done = ". [v] "; // задача выполнена
+
+    static boolean check_exist_task(List<Task> list_task) {
+        if (list_task.size() == 0){
             System.out.println("Не найдено ни одной задачи");
             return false;
         }
         return true;
     }
 
-    static void toggle_task(String in_progress, String done, String[][] list_task, Integer id_task) {
-        if (id_task > 0 & id_task < list_task.length)
-        {
-            if (list_task[id_task][1].equals(in_progress)) {
-                list_task[id_task][1] = done;
+    static void toggleTask(BufferedReader line, List<Task> list_task) throws IOException {
+        if (Helper.check_exist_task(list_task)) {
+            // System.out.println("Введите id задачи: ");
+            int id_task = Integer.parseInt(line.readLine()) - 1;
+            try {
+                Task task = list_task.get(id_task);
+                task.setDone(!task.isDone());
+                printTaskInfo(id_task, task);
             }
-            else {
-                list_task[id_task][1] = in_progress;
-            }
-            System.out.println("Статус задачи изменен: ");
-            for (int i = 0; i < list_task[id_task].length; ++i) {
-                System.out.print(list_task[id_task][i]);
+            catch (IndexOutOfBoundsException e) {
+                System.out.println("Задачи с таким id нет");
             }
         }
-        else{
-            System.out.println("Задачи с таким id нет");
-        }
-        System.out.println();
     }
-    static void print_in_progress_tasks(String in_progress, String[][] list_task) {
-        System.out.println("Список невыполненных задач: ");
-        for (String[] task : list_task) {
-            for(String param : task) {
-                if (task[1].equals(in_progress)) {
-                    System.out.print(param);
+
+    static void printInProgressTasks(List<Task> list_task) {
+        if (Helper.check_exist_task(list_task)) {
+            // System.out.println("Список невыполненных задач: ");
+            for (int i = 0; i < list_task.size(); i++) {
+                Task task = list_task.get(i);
+                if (!task.isDone()) {
+                    printTaskInfo(i, task);
                 }
             }
-            System.out.println();
         }
     }
 
-    static void print_all_tasks(String[][] list_task) {
-        System.out.println("Список абсолютно всех задач: ");
-        for (String[] task : list_task) {
-            for (String param : task) {
-                System.out.print(param);
+    static void printAllTasks(List<Task> list_task) {
+        if (Helper.check_exist_task(list_task))
+        {
+            // System.out.println("Список абсолютно всех задач: ");
+            for (int i = 0; i < list_task.size(); i++) {
+                printTaskInfo(i, list_task.get(i));
             }
-            System.out.println();
         }
     }
 
-    static int add_value_in_todo(int iter, String[][] list_task, String in_progress, String task_name) {
-        if (task_name.isBlank()) {
+    static void addValueInTodo(BufferedReader line, List<Task> list_task) throws IOException {
+//        System.out.print("Введите название задачи:  ");
+        String taskName = line.readLine();
+        if (taskName.isBlank()) {
             System.out.println("Вводить пустые строки, пробелы, перенос строки и обижать котяток нельзя.");
         } else {
-            for (int i = iter; i < iter + 1; i++) {
-                list_task[i][0] = Integer.toString(i);
-                list_task[i][1] = in_progress;
-                list_task[i][2] = task_name;
+            list_task.add(new Task(taskName));
+        }
+    }
+
+    public static void deleteTask(BufferedReader line, List<Task> list_task) throws IOException {
+        if (Helper.check_exist_task(list_task)) {
+            // System.out.println("Введите id задачи: ");
+            int id_task = Integer.parseInt(line.readLine()) - 1;
+            try {
+                list_task.remove(id_task);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Задачи с таким id нет");
             }
         }
-        iter++;
-        return iter;
+    }
+
+    public static void editTask(BufferedReader line, List<Task> list_task) throws IOException {
+        if (Helper.check_exist_task(list_task)) {
+            // System.out.println("Введите id задачи: ");
+            int id_task = Integer.parseInt(line.readLine()) - 1;
+            // System.out.println("Введите новое название задачи: ");
+            String new_value = line.readLine();
+            try {
+                list_task.get(id_task).setName(new_value);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Задачи с таким id нет");
+            }
+        }
+    }
+
+    public static void searchTask(BufferedReader line, List<Task> list_task) throws IOException {
+        if (Helper.check_exist_task(list_task)) {
+            // System.out.println("Текст для поиска: ");
+            String search = line.readLine();
+
+            boolean somethingSearched = false;
+            for (int i = 0; i < list_task.size(); i++) {
+                if (list_task.get(i).getName().contains(search)) {
+                    printTaskInfo(i, list_task.get(i));
+                    somethingSearched = true;
+                }
+            }
+
+            if (!somethingSearched) {
+                System.out.println("Ничего не найдено");
+            }
+        }
+    }
+
+    public static void printTaskInfo(int id, Task task) {
+        System.out.println((id + 1) + " " + (task.isDone() ? done : in_progress) + " " + task.getName());
+    }
+
+    static void helper() {
+        System.out.print("""
+    Вам доступны следующие команды:
+     help - все доступные команды
+     add - добавление новой задачи
+     print - получение невыполненных списка задач
+     print all - получение всех задач
+     toggle - переключение состояния задачи на противоположное
+     quit - завершение работы программы
+    """);
     }
 }
