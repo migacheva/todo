@@ -1,9 +1,12 @@
 package ru.kovalchuk;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
+@Slf4j
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader line = new BufferedReader(new InputStreamReader(System.in));
@@ -30,7 +33,7 @@ public class Main {
                 }else if (cmd.equals("quit")) {
                     in.close();
                 } else {
-                    System.out.println("Такой команды нет");
+                    log.error("Такой команды нет");
                 }
             }
         }
