@@ -32,9 +32,9 @@ public class Helper {
         }
     }
 
-    static void printTasks(List<Task> taskList, boolean flag_all) {
+    static void printTasks(List<Task> taskList, boolean flagAll) {
         if (Helper.checkExistTask(taskList)) {
-            if (!flag_all){
+            if (!flagAll){
                 IntStream.range(0, taskList.size())
                         .filter(i -> !taskList.get(i).isDone())
                         .forEach(i -> printTaskInfo(i, taskList.get(i)));
