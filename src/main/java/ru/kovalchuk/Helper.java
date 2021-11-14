@@ -1,66 +1,158 @@
 package ru.kovalchuk;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.IntStream;
+
+
 public class Helper {
-    static boolean check_exist_task(String[][] list_task) {
-        if (list_task[1][0].equals("")){
+    private static final String inProgress = ". [ ] "; // задача не выполнена
+    private static final String done = ". [v] "; // задача выполнена
+
+    static boolean checkExistTask(List<Task> taskList) {
+        if (taskList.size() == 0){
             System.out.println("Не найдено ни одной задачи");
             return false;
         }
         return true;
     }
 
-    static void toggle_task(String in_progress, String done, String[][] list_task, Integer id_task) {
-        if (id_task > 0 & id_task < list_task.length)
-        {
-            if (list_task[id_task][1].equals(in_progress)) {
-                list_task[id_task][1] = done;
+    static void toggleTask(List<Task> taskList, String idTask) {
+        if (Helper.checkExistTask(taskList)) {
+            try {
+                int id = Integer.parseInt(idTask) - 1;
+                Task task = taskList.get(id);
+                task.setDone(!task.isDone());
+                printTaskInfo(id, task);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Задачи с таким id нет");
+            } catch (NumberFormatException e){
+                System.out.println("Необходимо ввести id задачи цифрами");
             }
-            else {
-                list_task[id_task][1] = in_progress;
-            }
-            System.out.println("Статус задачи изменен: ");
-            for (int i = 0; i < list_task[id_task].length; ++i) {
-                System.out.print(list_task[id_task][i]);
-            }
-        }
-        else{
-            System.out.println("Задачи с таким id нет");
-        }
-        System.out.println();
-    }
-    static void print_in_progress_tasks(String in_progress, String[][] list_task) {
-        System.out.println("Список невыполненных задач: ");
-        for (String[] task : list_task) {
-            for(String param : task) {
-                if (task[1].equals(in_progress)) {
-                    System.out.print(param);
-                }
-            }
-            System.out.println();
         }
     }
 
-    static void print_all_tasks(String[][] list_task) {
-        System.out.println("Список абсолютно всех задач: ");
-        for (String[] task : list_task) {
-            for (String param : task) {
-                System.out.print(param);
+    static void printTasks(List<Task> taskList, boolean flagAll) {
+        if (Helper.checkExistTask(taskList)) {
+            if (!flagAll){
+                IntStream.range(0, taskList.size())
+                        .filter(i -> !taskList.get(i).isDone())
+                        .forEach(i -> printTaskInfo(i, taskList.get(i)));
+            } else {
+                IntStream.range(0, taskList.size())
+                        .forEach(i -> printTaskInfo(i, taskList.get(i)));
             }
-            System.out.println();
+
         }
     }
 
-    static int add_value_in_todo(int iter, String[][] list_task, String in_progress, String task_name) {
-        if (task_name.isBlank()) {
+
+    static void addValueInTodo(List<Task> taskList, String taskName) {
+        if (taskName.isBlank()) {
             System.out.println("Вводить пустые строки, пробелы, перенос строки и обижать котяток нельзя.");
         } else {
-            for (int i = iter; i < iter + 1; i++) {
-                list_task[i][0] = Integer.toString(i);
-                list_task[i][1] = in_progress;
-                list_task[i][2] = task_name;
+            taskList.add(new Task(taskName));
+        }
+    }
+
+    public static void deleteTask(List<Task> taskList, String idTask) {
+        if (Helper.checkExistTask(taskList)) {
+            try {
+                taskList.remove(Integer.parseInt(idTask) - 1);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Задачи с таким id нет");
+            } catch (NumberFormatException e){
+                System.out.println("Необходимо ввести id задачи цифрами");
             }
         }
-        iter++;
-        return iter;
+    }
+
+    public static void editTask(List<Task> taskList, String idTask, String newValue) {
+        if (Helper.checkExistTask(taskList)) {
+            try {
+                int id = Integer.parseInt(idTask) - 1;
+                taskList.get(id).setName(newValue);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Задачи с таким id нет");
+            } catch (NumberFormatException e){
+                System.out.println("Необходимо ввести id задачи");
+            }
+        }
+    }
+
+    public static void searchTask(List<Task> taskList, String searchData) {
+        if (Helper.checkExistTask(taskList)) {
+            boolean somethingSearched = false;
+            for (int i = 0; i < taskList.size(); i++) {
+                if (taskList.get(i).getName().contains(searchData)) {
+                    printTaskInfo(i, taskList.get(i));
+                    somethingSearched = true;
+                }
+            }
+            if (!somethingSearched) {
+                System.out.println("Ничего не найдено");
+            }
+        }
+    }
+
+    public static void printTaskInfo(int id, Task task) {
+        System.out.println((id + 1) + " " + (task.isDone() ? done : inProgress) + " " + task.getName());
+    }
+
+    static void helper() {
+        System.out.print("""
+    Список доступных команд:
+     help - все доступные команды
+     add - добавление новой задачи
+     print - получение невыполненных списка задач
+     print all - получение всех задач
+     toggle - переключение состояния задачи на противоположное
+     edit - изменение задачи
+     search - поиск задач
+     delete - удаление задачи
+     quit - завершение работы программы
+    """);
+    }
+
+    static String getCommand(String fullLine) {
+        String command = fullLine.split(" ")[0];
+        try {
+            if (fullLine.equals("print")
+                    || fullLine.equals("print all")
+                    || fullLine.equals("quit")){
+                return fullLine;
+            } else if (command.equals("add")
+                    || command.equals("toggle")
+                    || command.equals("search")
+                    || command.equals("delete")
+                    || command.equals("edit")){
+                return command;
+            } else {
+                System.out.println("Введен некорректный формат сообщения");
+            }
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException e){
+            System.out.println("Не найдены дополнительные аргументы");
+        }
+        return fullLine;
+    }
+
+    static List<String> getData(String fullLine) {
+        String command = fullLine.split(" ")[0];
+        if (fullLine.equals("print")
+                || fullLine.equals("print all")
+                || fullLine.equals("quit")){
+            return Collections.emptyList();
+        } else if (command.equals("add")
+                || command.equals("toggle")
+                || command.equals("search")
+                || command.equals("delete")){
+            String data = fullLine.split(" ", 2)[1];
+            return List.of(data);
+        } else if (command.equals("edit")){
+            String data1 = fullLine.split(" ", 3)[1];
+            String data2 = fullLine.split(" ", 3)[2];
+            return List.of(data1, data2);
+        }
+        return Collections.emptyList();
     }
 }
