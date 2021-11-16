@@ -9,31 +9,38 @@ import java.util.*;
 @Slf4j
 public class Main {
     public static void main(String[] args) throws IOException {
-        BufferedReader line = new BufferedReader(new InputStreamReader(System.in));
-        List<Task> list_task = new ArrayList<>();
-        try (Scanner in = new Scanner(System.in)) {
-            while(true) {
-                String cmd = in.nextLine();
-                if (cmd.equals("help")) {
-                    Helper.helper();
-                } else if (cmd.equals("add")) {
-                    Helper.addValueInTodo(line, list_task);
-                } else if (cmd.equals("print")) {
-                    Helper.printInProgressTasks(list_task);
-                } else if (cmd.equals("print all"))  {
-                    Helper.printAllTasks(list_task);
-                } else if (cmd.equals("toggle")) {
-                    Helper.toggleTask(line, list_task);
-                }  else if (cmd.equals("search")){
-                    Helper.searchTask(line, list_task);
-                } else if (cmd.equals("edit")){
-                    Helper.editTask(line, list_task);
-                } else if (cmd.equals("delete")){
-                    Helper.deleteTask(line, list_task);
-                }else if (cmd.equals("quit")) {
-                    in.close();
+        List<Task> taskList = new ArrayList<>();
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
+            while (true) {
+                String fullLine = in.readLine();
+                fullLine = fullLine.trim();
+                String commandName = Helper.getCommand(fullLine);
+                List<String> commandVariables;
+                try {
+                    commandVariables = Helper.getData(fullLine);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Не найдены дополнительные аргументы");
+                    continue;
+                }
+                if (commandName.equals("add")) {
+                    Helper.addValueInTodo(taskList, commandVariables.get(0));
+                } else if (commandName.equals("print")) {
+                    Helper.printTasks(taskList, false);
+                } else if (commandName.equals("print all")) {
+                    Helper.printTasks(taskList, true);
+                } else if (commandName.equals("toggle")) {
+                    Helper.toggleTask(taskList, commandVariables.get(0));
+                } else if (commandName.equals("search")) {
+                    Helper.searchTask(taskList, commandVariables.get(0));
+                } else if (commandName.equals("edit")) {
+                    Helper.editTask(taskList, commandVariables.get(0), commandVariables.get(1));
+                } else if (commandName.equals("delete")) {
+                    Helper.deleteTask(taskList, commandVariables.get(0));
+                } else if (commandName.equals("quit")) {
+                    break;
                 } else {
                     log.error("Такой команды нет");
+                    Helper.helper();
                 }
             }
         }
