@@ -50,16 +50,6 @@ public class Helper {
         }
     }
 
-    static void printAllTasks(List<Task> list_task) {
-        if (Helper.check_exist_task(list_task))
-        {
-            // System.out.println("Список абсолютно всех задач: ");
-            for (int i = 0; i < list_task.size(); i++) {
-                printTaskInfo(i, list_task.get(i));
-            }
-        }
-    }
-
     static void addValueInTodo(List<Task> taskList, String taskName) {
         if (taskName.isBlank()) {
             log.error("Вводить пустые строки, пробелы, перенос строки и обижать котяток нельзя.");
@@ -141,10 +131,10 @@ public class Helper {
                     || command.equals("edit")){
                 return command;
             } else {
-                System.out.println("Введен некорректный формат сообщения");
+                log.error("Введен некорректный формат сообщения");
             }
         } catch (ArrayIndexOutOfBoundsException | NullPointerException e){
-            System.out.println("Не найдены дополнительные аргументы");
+            log.error("Не найдены дополнительные аргументы");
         }
         return fullLine;
     }
