@@ -19,7 +19,7 @@ public class Main {
                 try {
                     commandVariables = Helper.getData(fullLine);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Не найдены дополнительные аргументы");
+                    log.error("Не найдены дополнительные аргументы");
                     continue;
                 }
                 if (commandName.equals("add")) {
