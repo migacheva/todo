@@ -1,8 +1,10 @@
 package ru.kovalchuk.Impl.command;
 
+import lombok.extern.slf4j.Slf4j;
 import ru.kovalchuk.TaskDao;
 
-public class AddCommand extends BaseCommand{
+@Slf4j
+public class AddCommand extends BaseCommand {
 
     private String nameTask;
 
@@ -13,6 +15,10 @@ public class AddCommand extends BaseCommand{
     }
 
     public void execute(){
-        taskDao.addTask(nameTask);
+        if (nameTask.isBlank()) {
+            log.error("Вводить пустые строки, пробелы, перенос строки и обижать котяток нельзя.");
+        } else {
+            taskDao.addTask(nameTask);
+        }
     }
 }

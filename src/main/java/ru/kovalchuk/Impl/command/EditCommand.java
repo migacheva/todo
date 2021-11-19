@@ -1,8 +1,9 @@
 package ru.kovalchuk.Impl.command;
 
-import ru.kovalchuk.Command;
+import lombok.extern.slf4j.Slf4j;
 import ru.kovalchuk.TaskDao;
 
+@Slf4j
 public class EditCommand extends BaseCommand {
 
     private int id;
@@ -17,6 +18,14 @@ public class EditCommand extends BaseCommand {
 
     @Override
     public void execute() {
-        taskDao.editTask(id, newName);
+        if (taskDao.getById(id) != null){
+            try {
+                taskDao.editTask(id, newName);
+            } catch (IndexOutOfBoundsException e) {
+                log.error("Задачи с таким id нет");
+            } catch (NumberFormatException e){
+                log.error("Необходимо ввести id задачи");
+            }
+        }
     }
 }

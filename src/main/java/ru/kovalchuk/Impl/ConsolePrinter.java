@@ -7,7 +7,7 @@ import ru.kovalchuk.Task;
 import java.util.List;
 
 @Slf4j
-public class PrinterImpl implements Printer {
+public class ConsolePrinter implements Printer {
     private static final String inProgress = ". [ ] "; // задача не выполнена
     private static final String done = ". [v] "; // задача выполнена
 

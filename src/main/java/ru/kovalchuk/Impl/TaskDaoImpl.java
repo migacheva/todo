@@ -4,7 +4,6 @@ import ru.kovalchuk.Task;
 import ru.kovalchuk.TaskDao;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -17,6 +16,10 @@ public class TaskDaoImpl implements TaskDao {
         return taskList.get(id);
     }
 
+//    @Override
+//    public List<Task> getAllTasks() {
+//        return taskList;
+//    }
     @Override
     public List<Task> findByNameSubstring(String value) {
         return null;

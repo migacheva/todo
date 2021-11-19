@@ -15,6 +15,16 @@ public class SearchCommand extends BaseCommand{
 
     @Override
     public void execute() {
+        // boolean somethingSearched = false;
+        // for (int i = 0; i < taskList.size(); i++) {
+        //     if (taskList.get(i).getName().contains(searchData)) {
+        //         printTaskInfo(i, taskList.get(i));
+        //         somethingSearched = true;
+        //     }
+        // }
+        // if (!somethingSearched) {
+        //     log.error("Ничего не найдено");
+        // }
         taskDao.findByNameSubstring(searchString);
     }
 }

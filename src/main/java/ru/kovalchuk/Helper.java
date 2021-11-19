@@ -20,20 +20,7 @@ public class Helper {
 //        return true;
 //    }
 //
-//    static void toggleTask(List<Task> taskList, String idTask) {
-//        if (Helper.checkExistTask(taskList)) {
-//            try {
-//                int id = Integer.parseInt(idTask) - 1;
-//                Task task = taskList.get(id);
-//                task.setDone(!task.isDone());
-//                printTaskInfo(id, task);
-//            } catch (IndexOutOfBoundsException e) {
-//                log.error("Задачи с таким id нет", e);
-//            } catch (NumberFormatException e){
-//                log.error("Необходимо ввести id задачи цифрами", e);
-//            }
-//        }
-//    }
+
 //
 //    static void printTasks(List<Task> taskList, boolean flagAll) {
 //        if (Helper.checkExistTask(taskList)) {
@@ -49,38 +36,6 @@ public class Helper {
 //        }
 //    }
 
-//    static void addValueInTodo(List<Task> taskList, String taskName) {
-//        if (taskName.isBlank()) {
-//            log.error("Вводить пустые строки, пробелы, перенос строки и обижать котяток нельзя.");
-//        } else {
-//            taskList.add(new Task(taskName));
-//        }
-//    }
-
-//    public static void deleteTask(List<Task> taskList, String idTask) {
-//        if (Helper.checkExistTask(taskList)) {
-//            try {
-//                taskList.remove(Integer.parseInt(idTask) - 1);
-//            } catch (IndexOutOfBoundsException e) {
-//                log.error("Задачи с таким id нет");
-//            } catch (NumberFormatException e){
-//                log.error("Необходимо ввести id задачи цифрами");
-//            }
-//        }
-//    }
-//
-//    public static void editTask(List<Task> taskList, String idTask, String newValue) {
-//        if (Helper.checkExistTask(taskList)) {
-//            try {
-//                int id = Integer.parseInt(idTask) - 1;
-//                taskList.get(id).setName(newValue);
-//            } catch (IndexOutOfBoundsException e) {
-//                log.error("Задачи с таким id нет");
-//            } catch (NumberFormatException e){
-//                log.error("Необходимо ввести id задачи");
-//            }
-//        }
-//    }
 //
 //    public static void searchTask(List<Task> taskList, String searchData) {
 //        if (Helper.checkExistTask(taskList)) {
