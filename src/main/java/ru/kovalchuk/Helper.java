@@ -10,8 +10,7 @@ import java.util.stream.IntStream;
 
 @Slf4j
 public class Helper {
-    private static final String inProgress = ". [ ] "; // задача не выполнена
-    private static final String done = ". [v] "; // задача выполнена
+
 
     static boolean checkExistTask(List<Task> taskList) {
         if (taskList.size() == 0){
@@ -117,45 +116,45 @@ public class Helper {
     """);
     }
 
-    static String getCommand(String fullLine) {
-        String command = fullLine.split(" ")[0];
-        try {
-            if (fullLine.equals("print")
-                    || fullLine.equals("print all")
-                    || fullLine.equals("quit")){
-                return fullLine;
-            } else if (command.equals("add")
-                    || command.equals("toggle")
-                    || command.equals("search")
-                    || command.equals("delete")
-                    || command.equals("edit")){
-                return command;
-            } else {
-                log.error("Введен некорректный формат сообщения");
-            }
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException e){
-            log.error("Не найдены дополнительные аргументы");
-        }
-        return fullLine;
-    }
-
-    static List<String> getData(String fullLine) {
-        String command = fullLine.split(" ")[0];
-        if (fullLine.equals("print")
-                || fullLine.equals("print all")
-                || fullLine.equals("quit")){
-            return Collections.emptyList();
-        } else if (command.equals("add")
-                || command.equals("toggle")
-                || command.equals("search")
-                || command.equals("delete")){
-            String data = fullLine.split(" ", 2)[1];
-            return List.of(data);
-        } else if (command.equals("edit")){
-            String data1 = fullLine.split(" ", 3)[1];
-            String data2 = fullLine.split(" ", 3)[2];
-            return List.of(data1, data2);
-        }
-        return Collections.emptyList();
-    }
+//    static String getCommand(String fullLine) {
+//        String command = fullLine.split(" ")[0];
+//        try {
+//            if (fullLine.equals("print")
+//                    || fullLine.equals("print all")
+//                    || fullLine.equals("quit")){
+//                return fullLine;
+//            } else if (command.equals("add")
+//                    || command.equals("toggle")
+//                    || command.equals("search")
+//                    || command.equals("delete")
+//                    || command.equals("edit")){
+//                return command;
+//            } else {
+//                log.error("Введен некорректный формат сообщения");
+//            }
+//        } catch (ArrayIndexOutOfBoundsException | NullPointerException e){
+//            log.error("Не найдены дополнительные аргументы");
+//        }
+//        return fullLine;
+//    }
+//
+//    static List<String> getData(String fullLine) {
+//        String command = fullLine.split(" ")[0];
+//        if (fullLine.equals("print")
+//                || fullLine.equals("print all")
+//                || fullLine.equals("quit")){
+//            return Collections.emptyList();
+//        } else if (command.equals("add")
+//                || command.equals("toggle")
+//                || command.equals("search")
+//                || command.equals("delete")){
+//            String data = fullLine.split(" ", 2)[1];
+//            return List.of(data);
+//        } else if (command.equals("edit")){
+//            String data1 = fullLine.split(" ", 3)[1];
+//            String data2 = fullLine.split(" ", 3)[2];
+//            return List.of(data1, data2);
+//        }
+//        return Collections.emptyList();
+//    }
 }
