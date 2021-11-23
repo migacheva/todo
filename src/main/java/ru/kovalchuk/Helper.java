@@ -11,36 +11,6 @@ import java.util.stream.IntStream;
 @Slf4j
 public class Helper {
 
-
-//    static boolean checkExistTask(List<Task> taskList) {
-//        if (taskList.size() == 0){
-//            log.error("Не найдено ни одной задачи");
-//            return false;
-//        }
-//        return true;
-//    }
-//
-
-//
-//    public static void searchTask(List<Task> taskList, String searchData) {
-//        if (Helper.checkExistTask(taskList)) {
-//            boolean somethingSearched = false;
-//            for (int i = 0; i < taskList.size(); i++) {
-//                if (taskList.get(i).getName().contains(searchData)) {
-//                    printTaskInfo(i, taskList.get(i));
-//                    somethingSearched = true;
-//                }
-//            }
-//            if (!somethingSearched) {
-//                log.error("Ничего не найдено");
-//            }
-//        }
-//    }
-
-//    public static void printTaskInfo(int id, Task task) {
-//        log.info((id + 1) + " " + (task.isDone() ? done : inProgress) + " " + task.getName());
-//    }
-//
     static void helper() {
         log.info("""
     Список доступных команд:
