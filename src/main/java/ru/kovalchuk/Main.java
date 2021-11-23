@@ -1,9 +1,12 @@
 package ru.kovalchuk;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
+@Slf4j
 public class Main {
     public static void main(String[] args) throws IOException {
         List<Task> taskList = new ArrayList<>();
@@ -16,7 +19,7 @@ public class Main {
                 try {
                     commandVariables = Helper.getData(fullLine);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Не найдены дополнительные аргументы");
+                    log.error("Не найдены дополнительные аргументы");
                     continue;
                 }
                 if (commandName.equals("add")) {
@@ -36,7 +39,7 @@ public class Main {
                 } else if (commandName.equals("quit")) {
                     break;
                 } else {
-                    System.out.println("Такой команды нет");
+                    log.error("Такой команды нет");
                     Helper.helper();
                 }
             }
