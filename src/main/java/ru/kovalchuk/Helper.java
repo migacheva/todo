@@ -22,21 +22,6 @@ public class Helper {
 //
 
 //
-//    static void printTasks(List<Task> taskList, boolean flagAll) {
-//        if (Helper.checkExistTask(taskList)) {
-//            if (!flagAll){
-//                log.debug("Список невыполненных задач: ");
-//                IntStream.range(0, taskList.size())
-//                        .filter(i -> !taskList.get(i).isDone())
-//                        .forEach(i -> printTaskInfo(i, taskList.get(i)));
-//            } else {
-//                IntStream.range(0, taskList.size())
-//                        .forEach(i -> printTaskInfo(i, taskList.get(i)));
-//            }
-//        }
-//    }
-
-//
 //    public static void searchTask(List<Task> taskList, String searchData) {
 //        if (Helper.checkExistTask(taskList)) {
 //            boolean somethingSearched = false;

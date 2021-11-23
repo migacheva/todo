@@ -1,1 +1,167 @@
-19.11.2021 21:15:50.193 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] pop
+21.11.2021 00:17:14.402 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1234567
+21.11.2021 00:17:14.414 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] qwertyu
+21.11.2021 00:17:14.414 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] not done
+21.11.2021 00:17:14.414 [main] INFO   r.k.I.ConsolePrinter - 4. [ ] not processing
+21.11.2021 00:17:25.762 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1234567
+21.11.2021 00:17:25.762 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] qwertyu
+21.11.2021 00:17:25.763 [main] INFO   r.k.I.ConsolePrinter - 4. [ ] not processing
+21.11.2021 00:18:34.321 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:18:34.325 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 2
+21.11.2021 00:18:34.326 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:18:41.846 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 2
+21.11.2021 00:18:41.846 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:18:46.864 [main] INFO   r.k.I.ConsolePrinter - 1. [v] 1
+21.11.2021 00:18:46.864 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 2
+21.11.2021 00:18:46.864 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:18:55.411 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:18:55.412 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 2
+21.11.2021 00:18:55.412 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:19:07.459 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:19:11.031 [main] INFO   r.k.I.ConsolePrinter - 1. [v] 1
+21.11.2021 00:19:11.031 [main] INFO   r.k.I.ConsolePrinter - 2. [v] 2
+21.11.2021 00:19:11.031 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:19:20.712 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:19:27.308 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:19:27.308 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:20:17.941 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:20:17.945 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 2
+21.11.2021 00:20:17.946 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:22:06.753 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:22:41.534 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:22:41.537 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 2
+21.11.2021 00:22:56.672 [main] INFO   r.k.I.ConsolePrinter - 1. [v] 1
+21.11.2021 00:22:56.672 [main] INFO   r.k.I.ConsolePrinter - 2. [v] 2
+21.11.2021 00:25:41.928 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:25:41.932 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 2
+21.11.2021 00:25:41.933 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:25:41.933 [main] INFO   r.k.I.ConsolePrinter - 4. [ ] 4
+21.11.2021 00:25:54.300 [main] INFO   r.k.I.ConsolePrinter - 0. [ ] 1
+21.11.2021 00:25:54.301 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 2
+21.11.2021 00:25:54.301 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 4
+21.11.2021 00:27:08.275 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:27:08.279 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 2
+21.11.2021 00:27:08.280 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:27:17.392 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:27:17.392 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 3
+21.11.2021 00:27:49.994 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:27:49.994 [main] INFO   r.k.I.ConsolePrinter - 2. [v] 3
+21.11.2021 00:28:15.901 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:28:15.901 [main] INFO   r.k.I.ConsolePrinter - 2. [v] 3
+21.11.2021 00:28:15.901 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:28:25.949 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:28:25.949 [main] INFO   r.k.I.ConsolePrinter - 2. [v] 2
+21.11.2021 00:28:25.949 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:28:32.429 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:28:32.430 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 2
+21.11.2021 00:28:32.430 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:28:49.587 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:28:49.588 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 23
+21.11.2021 00:28:49.588 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:28:54.245 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 23
+21.11.2021 00:28:54.245 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:29:03.952 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 23
+21.11.2021 00:29:13.730 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:29:13.730 [main] INFO   r.k.I.ConsolePrinter - 2. [ ] 2
+21.11.2021 00:29:13.730 [main] INFO   r.k.I.ConsolePrinter - 3. [ ] 3
+21.11.2021 00:29:59.049 [main] ERROR  ru.kovalchuk.Main - Не найдены дополнительные аргументы
+21.11.2021 00:30:17.281 [main] ERROR  ru.kovalchuk.Main - Не найдены дополнительные аргументы
+21.11.2021 00:30:34.289 [main] ERROR  ru.kovalchuk.Main - Не найдены дополнительные аргументы
+21.11.2021 00:30:40.201 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:31:51.862 [main] ERROR  r.k.I.c.DeleteCommand - Задачи с таким id нет
+21.11.2021 00:32:00.658 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:32:04.601 [main] ERROR  r.k.I.c.DeleteCommand - Задачи с таким id нет
+21.11.2021 00:33:28.993 [main] ERROR  ru.kovalchuk.Main - Не найдены дополнительные аргументы
+21.11.2021 00:33:33.446 [main] ERROR  r.k.I.c.DeleteCommand - Задачи с таким id нет
+21.11.2021 00:36:14.741 [main] ERROR  r.k.I.c.DeleteCommand - Задачи с таким id нет
+21.11.2021 00:36:20.785 [main] ERROR  ru.kovalchuk.Main - Не найдены дополнительные аргументы
+21.11.2021 00:36:24.224 [main] ERROR  r.k.I.c.DeleteCommand - Задачи с таким id нет
+21.11.2021 00:36:29.036 [main] ERROR  ru.kovalchuk.Main - Введен неверный формат поля
+21.11.2021 00:36:43.549 [main] ERROR  r.k.I.c.EditCommand - Задачи с таким id нет
+21.11.2021 00:36:50.064 [main] ERROR  ru.kovalchuk.Main - Введен неверный формат поля
+21.11.2021 00:36:57.741 [main] ERROR  ru.kovalchuk.Main - Введен неверный формат поля
+21.11.2021 00:39:22.733 [main] ERROR  r.k.I.c.SearchCommand - Ничего не найдено
+21.11.2021 00:43:32.849 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:43:32.853 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:43:36.645 [main] INFO   r.k.I.ConsolePrinter - 1. [ ] 1
+21.11.2021 00:43:45.009 [main] INFO   r.k.I.ConsolePrinter - 1. [v] 1
+21.11.2021 00:43:48.253 [main] ERROR  r.k.I.c.PrintCommand - Задач для вывода нет
+21.11.2021 00:43:54.936 [main] ERROR  r.k.I.c.PrintCommand - Задач для вывода нет
+21.11.2021 00:43:57.847 [main] ERROR  r.k.I.c.PrintCommand - Задач для вывода нет
+21.11.2021 00:44:05.522 [main] ERROR  r.k.I.c.SearchCommand - Ничего не найдено
+21.11.2021 00:44:55.954 [main] ERROR  r.k.I.c.ToggleCommand - Задачи с таким id нет
+java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)
+	at java.base/java.util.Objects.checkIndex(Objects.java:359)
+	at java.base/java.util.ArrayList.get(ArrayList.java:427)
+	at ru.kovalchuk.Impl.TaskDaoImpl.toggleTask(TaskDaoImpl.java:71)
+	at ru.kovalchuk.Impl.command.ToggleCommand.execute(ToggleCommand.java:20)
+	at ru.kovalchuk.Main.main(Main.java:20)
+21.11.2021 00:45:14.203 [main] ERROR  ru.kovalchuk.Main - Введен неверный формат поля
+21.11.2021 00:45:56.253 [main] ERROR  ru.kovalchuk.Helper - Введен некорректный формат сообщения
+21.11.2021 00:45:56.254 [main] ERROR  r.k.CommandFactory - Такой команды нет
+21.11.2021 00:45:56.254 [main] INFO   ru.kovalchuk.Helper - Список доступных команд:
+ help - все доступные команды
+ add - добавление новой задачи
+ print - получение невыполненных списка задач
+ print all - получение всех задач
+ toggle - переключение состояния задачи на противоположное
+ edit - изменение задачи
+ search - поиск задач
+ delete - удаление задачи
+ quit - завершение работы программы
+
+21.11.2021 00:46:23.165 [main] ERROR  ru.kovalchuk.Main - Введен неверный формат поля
+21.11.2021 00:46:29.793 [main] ERROR  ru.kovalchuk.Helper - Введен некорректный формат сообщения
+21.11.2021 00:46:29.794 [main] ERROR  r.k.CommandFactory - Такой команды нет
+21.11.2021 00:46:29.794 [main] INFO   ru.kovalchuk.Helper - Список доступных команд:
+ help - все доступные команды
+ add - добавление новой задачи
+ print - получение невыполненных списка задач
+ print all - получение всех задач
+ toggle - переключение состояния задачи на противоположное
+ edit - изменение задачи
+ search - поиск задач
+ delete - удаление задачи
+ quit - завершение работы программы
+
+21.11.2021 00:48:35.042 [main] ERROR  ru.kovalchuk.Helper - Введен некорректный формат сообщения
+21.11.2021 00:48:35.046 [main] INFO   ru.kovalchuk.Helper - Список доступных команд:
+ help - все доступные команды
+ add - добавление новой задачи
+ print - получение невыполненных списка задач
+ print all - получение всех задач
+ toggle - переключение состояния задачи на противоположное
+ edit - изменение задачи
+ search - поиск задач
+ delete - удаление задачи
+ quit - завершение работы программы
+
+21.11.2021 00:48:35.048 [main] ERROR  ru.kovalchuk.Main - Такой команды нет
+21.11.2021 00:48:44.117 [main] ERROR  ru.kovalchuk.Helper - Введен некорректный формат сообщения
+21.11.2021 00:48:44.118 [main] INFO   ru.kovalchuk.Helper - Список доступных команд:
+ help - все доступные команды
+ add - добавление новой задачи
+ print - получение невыполненных списка задач
+ print all - получение всех задач
+ toggle - переключение состояния задачи на противоположное
+ edit - изменение задачи
+ search - поиск задач
+ delete - удаление задачи
+ quit - завершение работы программы
+
+21.11.2021 00:48:44.118 [main] ERROR  ru.kovalchuk.Main - Такой команды нет
+21.11.2021 00:48:55.071 [main] ERROR  ru.kovalchuk.Helper - Введен некорректный формат сообщения
+21.11.2021 00:48:55.072 [main] INFO   ru.kovalchuk.Helper - Список доступных команд:
+ help - все доступные команды
+ add - добавление новой задачи
+ print - получение невыполненных списка задач
+ print all - получение всех задач
+ toggle - переключение состояния задачи на противоположное
+ edit - изменение задачи
+ search - поиск задач
+ delete - удаление задачи
+ quit - завершение работы программы
+
+21.11.2021 00:48:55.072 [main] ERROR  ru.kovalchuk.Main - Такой команды нет

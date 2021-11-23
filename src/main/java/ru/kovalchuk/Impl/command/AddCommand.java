@@ -16,7 +16,7 @@ public class AddCommand extends BaseCommand {
 
     public void execute(){
         if (nameTask.isBlank()) {
-            log.error("Вводить пустые строки, пробелы, перенос строки и обижать котяток нельзя.");
+            log.error("Вводить пустые строки, пробелы, перенос строки.");
         } else {
             taskDao.addTask(nameTask);
         }

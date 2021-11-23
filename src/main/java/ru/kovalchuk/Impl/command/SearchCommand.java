@@ -1,30 +1,26 @@
 package ru.kovalchuk.Impl.command;
 
+import lombok.extern.slf4j.Slf4j;
+import ru.kovalchuk.Printer;
 import ru.kovalchuk.TaskDao;
 
+@Slf4j
 public class SearchCommand extends BaseCommand{
-    // как добавить поиск по id
+    private final String searchString;
 
-    private String searchString;
-
-    public SearchCommand(TaskDao taskDao, String searchString) {
+    public SearchCommand(TaskDao taskDao, Printer printer, String searchString) {
         super.taskDao = taskDao;
+        super.printer = printer;
 
         this.searchString = searchString;
     }
 
     @Override
     public void execute() {
-        // boolean somethingSearched = false;
-        // for (int i = 0; i < taskList.size(); i++) {
-        //     if (taskList.get(i).getName().contains(searchData)) {
-        //         printTaskInfo(i, taskList.get(i));
-        //         somethingSearched = true;
-        //     }
-        // }
-        // if (!somethingSearched) {
-        //     log.error("Ничего не найдено");
-        // }
-        taskDao.findByNameSubstring(searchString);
+        if (!taskDao.findByNameSubstring(searchString).isEmpty()){
+            printer.printTasks(taskDao.findByNameSubstring(searchString));
+        } else {
+            log.error("Ничего не найдено");
+        }
     }
 }

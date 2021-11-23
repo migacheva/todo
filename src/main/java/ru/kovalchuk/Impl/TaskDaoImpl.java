@@ -5,6 +5,7 @@ import ru.kovalchuk.TaskDao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 
 public class TaskDaoImpl implements TaskDao {
@@ -16,13 +17,31 @@ public class TaskDaoImpl implements TaskDao {
         return taskList.get(id);
     }
 
-//    @Override
-//    public List<Task> getAllTasks() {
-//        return taskList;
-//    }
+    @Override
+    public List<Task> getAllTasks() {
+        return taskList;
+    }
+
+    @Override
+    public List<Task> getProcessingTasks() {
+        List<Task> result = new ArrayList<>();
+        for (int i=0; i<taskList.size(); i++){
+            if (!taskList.get(i).isDone()){
+                result.add(getById(i));
+            }
+        }
+        return result;
+    }
+
     @Override
     public List<Task> findByNameSubstring(String value) {
-        return null;
+        List<Task> result = new ArrayList<>();
+         for (int i = 0; i < taskList.size(); i++) {
+             if (taskList.get(i).getName().contains(value)) {
+                 result.add(getById(i));
+             }
+         }
+        return result;
     }
 
     @Override
@@ -38,7 +57,7 @@ public class TaskDaoImpl implements TaskDao {
         taskList.remove(id);
         // Синхронизация id в списке с id в Task
         for (int i = 0; i < taskList.size(); i++) {
-            taskList.get(i).setId(i);
+            taskList.get(i).setId(i + 1);
         }
     }
 

@@ -3,7 +3,6 @@ import lombok.extern.slf4j.Slf4j;
 import ru.kovalchuk.Impl.command.*;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 @Slf4j
@@ -26,21 +25,20 @@ public class CommandFactory {
         if (commandName.equals("add")) {
             return new AddCommand(taskDao, commandVariables.get(0));
         } else if (commandName.equals("print")) {
-//                Helper.printTasks(taskList, false);
+            return new PrintCommand(taskDao, printer, false);
         } else if (commandName.equals("print all")) {
-            return new PrintCommand(taskDao, printer);
+            return new PrintCommand(taskDao, printer, true);
         } else if (commandName.equals("toggle")) {
             return new ToggleCommand(taskDao, Integer.parseInt(commandVariables.get(0)));
         } else if (commandName.equals("search")) {
-            return new SearchCommand(taskDao, commandVariables.get(0));
+            return new SearchCommand(taskDao, printer, commandVariables.get(0));
         } else if (commandName.equals("edit")) {
             return new EditCommand(taskDao, Integer.parseInt(commandVariables.get(0)), commandVariables.get(1));
         } else if (commandName.equals("delete")) {
             return new DeleteCommand(taskDao, Integer.parseInt((commandVariables.get(0))));
-        // } else if (commandName.equals("quit")) {
-        //     break;
+         } else if (commandName.equals("quit")) {
+             System.exit(0);
         } else {
-            log.error("Такой команды нет");
             Helper.helper();
         }
         return null;

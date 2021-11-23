@@ -12,20 +12,18 @@ public class EditCommand extends BaseCommand {
     public EditCommand(TaskDao taskDao, int id, String newName) {
         super.taskDao = taskDao;
 
-        this.id = id;
+        this.id = id - 1;
         this.newName = newName;
     }
 
     @Override
     public void execute() {
-        if (taskDao.getById(id) != null){
-            try {
-                taskDao.editTask(id, newName);
-            } catch (IndexOutOfBoundsException e) {
-                log.error("Задачи с таким id нет");
-            } catch (NumberFormatException e){
-                log.error("Необходимо ввести id задачи");
-            }
+        try {
+            taskDao.editTask(id, newName);
+        } catch (IndexOutOfBoundsException e) {
+            log.error("Задачи с таким id нет");
+        } catch (NumberFormatException e){
+            log.error("Необходимо ввести id задачи");
         }
     }
 }

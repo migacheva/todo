@@ -6,7 +6,9 @@ public interface TaskDao {
 
     Task getById(int id);
 
-//    List<Task> getAllTasks();
+    List<Task> getAllTasks();
+
+    List<Task> getProcessingTasks();
 
     List<Task> findByNameSubstring(String value);
 

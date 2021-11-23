@@ -22,6 +22,10 @@ public class Main {
                     log.error("Не найдены дополнительные аргументы");
                 } catch (IOException e) {
                     e.printStackTrace();
+                } catch (NumberFormatException e){
+                    log.error("Введен неверный формат поля");
+                } catch (NullPointerException e) {
+                    log.error("Такой команды нет");
                 }
             }
         }

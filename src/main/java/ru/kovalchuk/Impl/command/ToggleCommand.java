@@ -11,19 +11,15 @@ public class ToggleCommand extends BaseCommand{
     public ToggleCommand(TaskDao taskDao, int id){
         super.taskDao = taskDao;
 
-        this.id = id;
+        this.id = id - 1;
     }
 
     @Override
     public void execute() {
-        if (taskDao.getById(id) != null) {
-            try {
-                taskDao.toggleTask(id);
-            } catch (IndexOutOfBoundsException e) {
-                log.error("Задачи с таким id нет", e);
-            } catch (NumberFormatException e){
-                log.error("Необходимо ввести id задачи цифрами", e);
-            }
+        try {
+            taskDao.toggleTask(id);
+        } catch (IndexOutOfBoundsException e) {
+            log.error("Задачи с таким id нет", e);
         }
     }
 }
