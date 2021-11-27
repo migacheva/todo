@@ -3,22 +3,21 @@ package ru.kovalchuk.Impl.command;
 import lombok.extern.slf4j.Slf4j;
 import ru.kovalchuk.TaskDao;
 
+import java.util.List;
+
 @Slf4j
 public class AddCommand extends BaseCommand {
 
-    private String nameTask;
-
-    public AddCommand(TaskDao taskDao, String nameTask){
-        super.taskDao = taskDao;
-
-        this.nameTask = nameTask;
+    public AddCommand(TaskDao taskDao) {
+        super(taskDao);
     }
 
-    public void execute(){
-        if (nameTask.isBlank()) {
+    public void execute(List<String> params){
+        String taskName = params.get(0);
+        if (taskName.isBlank()) {
             log.error("Вводить пустые строки, пробелы, перенос строки.");
         } else {
-            taskDao.addTask(nameTask);
+            taskDao.addTask(taskName);
         }
     }
 }

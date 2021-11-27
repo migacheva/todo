@@ -13,8 +13,12 @@ public class ConsolePrinter implements Printer {
 
     @Override
     public void printTasks(List<Task> listTask) {
-        listTask.forEach(task -> log.info(representTask(task)));
-        listTask.forEach(task -> System.out.println(representTask(task)));
+        listTask.stream()
+                .map(this::representTask)
+                .forEach(taskString -> {
+                    log.info(taskString);
+                    System.out.println(taskString);
+                });
     }
 
     private String representTask(Task task) {

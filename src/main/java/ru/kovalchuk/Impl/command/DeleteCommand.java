@@ -3,19 +3,18 @@ package ru.kovalchuk.Impl.command;
 import lombok.extern.slf4j.Slf4j;
 import ru.kovalchuk.TaskDao;
 
+import java.util.List;
+
 @Slf4j
 public class DeleteCommand extends BaseCommand {
 
-    private final int id;
-
-    public DeleteCommand(TaskDao taskDao, int id) {
-        super.taskDao = taskDao;
-
-        this.id = id - 1;
+    public DeleteCommand(TaskDao taskDao) {
+        super(taskDao);
     }
 
     @Override
-    public void execute() {
+    public void execute(List<String> params) {
+        int id = Integer.parseInt(params.get(0)) - 1;
         try {
             taskDao.deleteTask(id);
         } catch (IndexOutOfBoundsException e) {

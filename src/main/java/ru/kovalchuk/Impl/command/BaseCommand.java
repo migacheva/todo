@@ -9,4 +9,12 @@ public abstract class BaseCommand implements Command {
     protected TaskDao taskDao;
     protected Printer printer;
 
+    public BaseCommand(TaskDao taskDao){
+        this.taskDao = taskDao;
+    }
+
+    public BaseCommand(TaskDao taskDao, Printer printer){
+        this(taskDao);
+        this.printer = printer;
+    }
 }

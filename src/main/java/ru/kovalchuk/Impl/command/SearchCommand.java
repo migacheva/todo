@@ -4,19 +4,18 @@ import lombok.extern.slf4j.Slf4j;
 import ru.kovalchuk.Printer;
 import ru.kovalchuk.TaskDao;
 
+import java.util.List;
+
 @Slf4j
 public class SearchCommand extends BaseCommand{
-    private final String searchString;
 
-    public SearchCommand(TaskDao taskDao, Printer printer, String searchString) {
-        super.taskDao = taskDao;
-        super.printer = printer;
-
-        this.searchString = searchString;
+    public SearchCommand(TaskDao taskDao, Printer printer) {
+        super(taskDao, printer);
     }
 
     @Override
-    public void execute() {
+    public void execute(List<String> params) {
+        String searchString = params.get(0);
         if (!taskDao.findByNameSubstring(searchString).isEmpty()){
             printer.printTasks(taskDao.findByNameSubstring(searchString));
         } else {

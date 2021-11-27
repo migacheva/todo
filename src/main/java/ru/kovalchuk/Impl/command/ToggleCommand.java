@@ -3,19 +3,18 @@ package ru.kovalchuk.Impl.command;
 import lombok.extern.slf4j.Slf4j;
 import ru.kovalchuk.TaskDao;
 
+import java.util.List;
+
 @Slf4j
 public class ToggleCommand extends BaseCommand{
 
-    private int id;
-
-    public ToggleCommand(TaskDao taskDao, int id){
-        super.taskDao = taskDao;
-
-        this.id = id - 1;
+    public ToggleCommand(TaskDao taskDao) {
+        super(taskDao);
     }
 
     @Override
-    public void execute() {
+    public void execute(List<String> params) {
+        int id = Integer.parseInt(params.get(0)) - 1;
         try {
             taskDao.toggleTask(id);
         } catch (IndexOutOfBoundsException e) {

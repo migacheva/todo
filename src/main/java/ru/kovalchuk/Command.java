@@ -1,5 +1,7 @@
 package ru.kovalchuk;
 
+import java.util.List;
+
 public interface Command {
-    void execute();
+    void execute(List<String> params);
 }
