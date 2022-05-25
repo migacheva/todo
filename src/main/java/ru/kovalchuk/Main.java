@@ -1,8 +1,5 @@
 package ru.kovalchuk;
 import lombok.extern.slf4j.Slf4j;
-import ru.kovalchuk.Impl.ConsolePrinter;
-import ru.kovalchuk.Impl.TaskDaoImpl;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,9 +7,7 @@ import java.io.InputStreamReader;
 @Slf4j
 public class Main {
     public static void main(String[] args) throws IOException {
-        TaskDao taskDao = new TaskDaoImpl();
-        Printer printer = new ConsolePrinter();
-        CommandFactory factory = new CommandFactory(taskDao, printer);
+        CommandFactory factory = new CommandFactory();
 
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             while(true) {

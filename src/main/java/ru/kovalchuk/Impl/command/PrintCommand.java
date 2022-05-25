@@ -1,32 +1,29 @@
 package ru.kovalchuk.Impl.command;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.kovalchuk.Printer;
-import ru.kovalchuk.TaskDao;
+import ru.kovalchuk.Impl.ConsolePrinter;
+import ru.kovalchuk.Impl.TaskDao;
 
 @Slf4j
 public class PrintCommand extends BaseCommand {
 
     private final Boolean printAll;
 
-    public PrintCommand(TaskDao taskDao, Printer printer, Boolean printAll) {
-        super.taskDao = taskDao;
-        super.printer = printer;
-
+    public PrintCommand(Boolean printAll) {
         this.printAll = printAll;
     }
 
     @Override
     public void execute() {
         if (printAll){
-            if (!taskDao.getAllTasks().isEmpty()){
-                printer.printTasks(taskDao.getAllTasks());
+            if (!TaskDao.getInstance().getAllTasks().isEmpty()){
+                ConsolePrinter.getInstance().printTasks(TaskDao.getInstance().getAllTasks());
             } else {
                 log.error("Задач для вывода нет");
             }
         } else {
-            if (!taskDao.getProcessingTasks().isEmpty()) {
-                printer.printTasks(taskDao.getProcessingTasks());
+            if (!TaskDao.getInstance().getProcessingTasks().isEmpty()) {
+                ConsolePrinter.getInstance().printTasks(TaskDao.getInstance().getProcessingTasks());
             } else {
                 log.error("Задач для вывода нет");
             }

@@ -1,17 +1,25 @@
 package ru.kovalchuk;
-
 import java.util.Collections;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.List;
-import java.util.stream.IntStream;
 
 @Slf4j
 public class Helper {
 
-    static void helper() {
+    private static Helper instance;
+
+    public static Helper getInstance(){
+        if (instance == null){
+            instance = new Helper();
+        }
+        return instance;
+    }
+
+    private Helper(){
+        // это приватный (о боже) конструктор
+    }
+
+    public void helper() {
         log.info("""
     Список доступных команд:
      help - все доступные команды
@@ -26,7 +34,7 @@ public class Helper {
     """);
     }
 
-    static String getCommand(String fullLine) {
+    public String getCommand(String fullLine) {
         String command = fullLine.split(" ")[0];
         try {
             if (fullLine.equals("print")
@@ -48,7 +56,7 @@ public class Helper {
         return fullLine;
     }
 
-    static List<String> getData(String fullLine) {
+    public List<String> getData(String fullLine) {
         String command = fullLine.split(" ")[0];
         if (fullLine.equals("print")
                 || fullLine.equals("print all")

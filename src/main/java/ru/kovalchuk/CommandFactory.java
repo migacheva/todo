@@ -8,38 +8,33 @@ import java.util.List;
 @Slf4j
 public class CommandFactory {
 
-    TaskDao taskDao;
-    Printer printer;
 
-    public CommandFactory(TaskDao taskDao, Printer printer) {
-        this.taskDao = taskDao;
-        this.printer = printer;
-    }
+    public CommandFactory() {}
 
     Command getCommand(BufferedReader in) throws ArrayIndexOutOfBoundsException, IOException{
         String fullLine = in.readLine();
         fullLine = fullLine.trim();
-        String commandName = Helper.getCommand(fullLine);
+        String commandName = Helper.getInstance().getCommand(fullLine);
         List<String> commandVariables;
-        commandVariables = Helper.getData(fullLine);
+        commandVariables = Helper.getInstance().getData(fullLine);
         if (commandName.equals("add")) {
-            return new AddCommand(taskDao, commandVariables.get(0));
+            return new AddCommand(commandVariables.get(0));
         } else if (commandName.equals("print")) {
-            return new PrintCommand(taskDao, printer, false);
+            return new PrintCommand(false);
         } else if (commandName.equals("print all")) {
-            return new PrintCommand(taskDao, printer, true);
+            return new PrintCommand(true);
         } else if (commandName.equals("toggle")) {
-            return new ToggleCommand(taskDao, Integer.parseInt(commandVariables.get(0)));
+            return new ToggleCommand(Integer.parseInt(commandVariables.get(0)));
         } else if (commandName.equals("search")) {
-            return new SearchCommand(taskDao, printer, commandVariables.get(0));
+            return new SearchCommand(commandVariables.get(0));
         } else if (commandName.equals("edit")) {
-            return new EditCommand(taskDao, Integer.parseInt(commandVariables.get(0)), commandVariables.get(1));
+            return new EditCommand(Integer.parseInt(commandVariables.get(0)), commandVariables.get(1));
         } else if (commandName.equals("delete")) {
-            return new DeleteCommand(taskDao, Integer.parseInt((commandVariables.get(0))));
+            return new DeleteCommand(Integer.parseInt((commandVariables.get(0))));
          } else if (commandName.equals("quit")) {
              System.exit(0);
         } else {
-            Helper.helper();
+            Helper.getInstance().helper();
         }
         return null;
     }
