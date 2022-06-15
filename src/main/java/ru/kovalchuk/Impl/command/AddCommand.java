@@ -1,21 +1,22 @@
 package ru.kovalchuk.Impl.command;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.kovalchuk.Impl.TaskDao;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class AddCommand extends BaseCommand {
 
-    private String nameTask;
-    public AddCommand(String nameTask){
-        this.nameTask = nameTask;
+    public AddCommand(){
+        commandName = "add";
     }
 
-    public void execute(){
-        if (nameTask.isBlank()) {
+    public void execute(Object[] params){
+        String nameTask = (String) params[0];
+        if (nameTask == null || nameTask.isBlank()) {
             log.error("Вводить пустые строки, пробелы, перенос строки.");
         } else {
-            TaskDao.getInstance().addTask(nameTask);
+            taskDao.addTask(nameTask);
         }
     }
 }

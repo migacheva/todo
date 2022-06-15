@@ -1,5 +1,6 @@
 package ru.kovalchuk;
 
 public interface Command {
-    void execute();
+    boolean canProcess(String command);
+    void execute(Object[] params);
 }

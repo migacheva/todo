@@ -1,21 +1,21 @@
 package ru.kovalchuk.Impl.command;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.kovalchuk.Impl.TaskDao;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class ToggleCommand extends BaseCommand{
 
-    private int id;
-
-    public ToggleCommand(int id){
-        this.id = id - 1;
+    public ToggleCommand(){
+        commandName = "toggle";
     }
 
     @Override
-    public void execute() {
+    public void execute(Object [] params) {
+        int id = Integer.parseInt((String) params[0]) - 1;
         try {
-            TaskDao.getInstance().toggleTask(id);
+            taskDao.toggleTask(id);
         } catch (IndexOutOfBoundsException e) {
             log.error("Задачи с таким id нет", e);
         }

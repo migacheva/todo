@@ -1,29 +1,32 @@
 package ru.kovalchuk.Impl.command;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.kovalchuk.Impl.ConsolePrinter;
-import ru.kovalchuk.Impl.TaskDao;
 
 @Slf4j
+@Component
 public class PrintCommand extends BaseCommand {
+    @Autowired
+    private ConsolePrinter consolePrinter;
 
-    private final Boolean printAll;
-
-    public PrintCommand(Boolean printAll) {
-        this.printAll = printAll;
+    public PrintCommand() {
+        commandName = "print";
     }
 
     @Override
-    public void execute() {
+    public void execute(Object [] params) {
+        boolean printAll = (boolean) params[0];
         if (printAll){
-            if (!TaskDao.getInstance().getAllTasks().isEmpty()){
-                ConsolePrinter.getInstance().printTasks(TaskDao.getInstance().getAllTasks());
+            if (!taskDao.getAllTasks().isEmpty()){
+                consolePrinter.printTasks(taskDao.getAllTasks());
             } else {
                 log.error("Задач для вывода нет");
             }
         } else {
-            if (!TaskDao.getInstance().getProcessingTasks().isEmpty()) {
-                ConsolePrinter.getInstance().printTasks(TaskDao.getInstance().getProcessingTasks());
+            if (!taskDao.getProcessingTasks().isEmpty()) {
+                consolePrinter.printTasks(taskDao.getProcessingTasks());
             } else {
                 log.error("Задач для вывода нет");
             }

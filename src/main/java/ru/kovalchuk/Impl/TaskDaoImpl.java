@@ -1,23 +1,19 @@
 package ru.kovalchuk.Impl;
+import org.springframework.stereotype.Component;
 import ru.kovalchuk.Task;
+import ru.kovalchuk.TaskDao;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+public class TaskDaoImpl implements TaskDao {
 
-public class TaskDao{
-
-    public static TaskDao instance;
-    public static TaskDao getInstance(){
-        if (instance == null){
-            instance = new TaskDao();
-        }
-        return instance;
-    }
-    private TaskDao(){
+    public TaskDaoImpl(){
         taskList = new ArrayList<>();
     }
 
-    private List<Task> taskList;
+    private final List<Task> taskList;
 
 
     public Task getById(int id) {

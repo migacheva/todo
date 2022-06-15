@@ -37,11 +37,9 @@ public class Helper {
     public String getCommand(String fullLine) {
         String command = fullLine.split(" ")[0];
         try {
-            if (fullLine.equals("print")
-                    || fullLine.equals("print all")
-                    || fullLine.equals("quit")){
-                return fullLine;
-            } else if (command.equals("add")
+            if (command.equals("print")
+                    || command.equals("quit")
+                    || command.equals("add")
                     || command.equals("toggle")
                     || command.equals("search")
                     || command.equals("delete")
@@ -56,11 +54,21 @@ public class Helper {
         return fullLine;
     }
 
-    public List<String> getData(String fullLine) {
+    public List<Object> getData(String fullLine) {
         String command = fullLine.split(" ")[0];
-        if (fullLine.equals("print")
-                || fullLine.equals("print all")
-                || fullLine.equals("quit")){
+        if (command.equals("print")){
+            String [] data = fullLine.split(" ", 2);
+            if (data.length == 1){
+                return List.of(false);
+            }
+            else if (data[1].equals("all")){
+                return List.of(true);
+            }
+            else {
+                return Collections.emptyList();
+            }
+        }
+        else if (fullLine.equals("quit")){
             return Collections.emptyList();
         } else if (command.equals("add")
                 || command.equals("toggle")
