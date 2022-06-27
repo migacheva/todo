@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.kovalchuk.task.model.ValidationError;
 
 import javax.validation.ConstraintViolationException;
-import java.util.Iterator;
 
 @ControllerAdvice
 public class Catcher {
@@ -25,11 +24,8 @@ public class Catcher {
     public ResponseEntity<ValidationError> paramsException(MethodArgumentNotValidException e) {
         StringBuilder sb = (new StringBuilder(""));
         BindingResult bindingResult = e.getBindingResult();
-        Iterator var = bindingResult.getAllErrors().iterator();
-        while (var.hasNext()){
-            ObjectError error = (ObjectError)var.next();
-            if (error instanceof FieldError){
-                FieldError fieldError = (FieldError) error;
+        for (ObjectError error : bindingResult.getAllErrors()) {
+            if (error instanceof FieldError fieldError) {
                 sb.append("field [").append(fieldError.getField()).append("] ");
                 sb.append("error [").append(fieldError.getDefaultMessage()).append("] ");
             }
