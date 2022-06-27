@@ -1,7 +1,7 @@
-package ru.kovalchuk.Impl;
+package ru.kovalchuk.task.dao;
+
 import org.springframework.stereotype.Component;
-import ru.kovalchuk.Task;
-import ru.kovalchuk.TaskDao;
+import ru.kovalchuk.task.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,11 +44,12 @@ public class TaskDaoImpl implements TaskDao {
         return result;
     }
 
-    public void addTask(String taskName) {
+    public int addTask(String taskName) {
         int id = taskList.stream()
                 .mapToInt(Task::getId)
                 .max().orElse(0);
         taskList.add(new Task(id + 1, taskName));
+        return id;
     }
 
     public void deleteTask(int id) {

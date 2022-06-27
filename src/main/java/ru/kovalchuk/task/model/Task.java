@@ -1,4 +1,4 @@
-package ru.kovalchuk;
+package ru.kovalchuk.task.model;
 import lombok.Data;
 
 @Data

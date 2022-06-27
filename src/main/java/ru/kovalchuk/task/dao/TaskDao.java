@@ -1,4 +1,7 @@
-package ru.kovalchuk;
+package ru.kovalchuk.task.dao;
+
+import ru.kovalchuk.task.model.Task;
+
 import java.util.List;
 
 public interface TaskDao {
@@ -11,7 +14,7 @@ public interface TaskDao {
 
     List<Task> findByNameSubstring(String value);
 
-    void addTask(String taskName);
+    int addTask(String taskName);
 
     void deleteTask(int id);
 
