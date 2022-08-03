@@ -36,20 +36,20 @@ public class TaskController {
     }
 
     @GetMapping("/{task_id}")
-    public ResponseEntity<Task> getTask(@PathVariable("task_id") int taskId) {
+    public ResponseEntity<Task> getTask(@PathVariable("task_id") Long taskId) {
         return ResponseEntity.ok(taskDao.getById(taskId));
     }
 
     @PostMapping
     public ResponseEntity<Void> addTask(@Valid @RequestBody AddTaskRequest request) {
-        int id = taskDao.addTask(request.getNameTask());
+        Long id = taskDao.addTask(request.getNameTask());
         URI location = URI.create("/task/" + id);
         return ResponseEntity.created(location).build();
     }
 
     @PostMapping("/{task_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void editTask(@PathVariable("task_id") int taskId,
+    public void editTask(@PathVariable("task_id") Long taskId,
                          @Valid @RequestBody EditTaskRequest request) {
         if (request.getNewTaskName() != null){
             taskDao.editTask(taskId, request.getNewTaskName());
@@ -61,7 +61,7 @@ public class TaskController {
 
     @DeleteMapping("/{task_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTask(@PathVariable("task_id") @Min(0) int taskId){
+    public void deleteTask(@PathVariable("task_id") @Min(0) Long taskId){
         taskDao.deleteTask(taskId);
     }
 }

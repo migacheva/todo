@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TaskDao {
 
-    Task getById(int id);
+    Task getById(Long id);
 
     List<Task> getAllTasks();
 
@@ -14,12 +14,12 @@ public interface TaskDao {
 
     List<Task> findByNameSubstring(String value);
 
-    int addTask(String taskName);
+    Long addTask(String taskName);
 
-    void deleteTask(int id);
+    void deleteTask(Long id);
 
-    void editTask(int id, String name);
+    void editTask(Long id, String name);
 
-    void toggleTask(int id);
+    void toggleTask(Long id);
 
 }

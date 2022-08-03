@@ -16,8 +16,8 @@ public class TaskDaoImpl implements TaskDao {
     private final List<Task> taskList;
 
 
-    public Task getById(int id) {
-        return taskList.get(id);
+    public Task getById(Long id) {
+        return taskList.get(id.intValue());
     }
 
     public List<Task> getAllTasks() {
@@ -28,7 +28,7 @@ public class TaskDaoImpl implements TaskDao {
         List<Task> result = new ArrayList<>();
         for (int i=0; i<taskList.size(); i++){
             if (!taskList.get(i).isDone()){
-                result.add(getById(i));
+                result.add(getById((long) i));
             }
         }
         return result;
@@ -38,35 +38,34 @@ public class TaskDaoImpl implements TaskDao {
         List<Task> result = new ArrayList<>();
          for (int i = 0; i < taskList.size(); i++) {
              if (taskList.get(i).getName().contains(value)) {
-                 result.add(getById(i));
+                 result.add(getById((long) i));
              }
          }
         return result;
     }
 
-    public int addTask(String taskName) {
-        int id = taskList.stream()
-                .mapToInt(Task::getId)
-                .max().orElse(0);
-        taskList.add(new Task(id + 1, taskName));
+    public Long addTask(String taskName) {
+        long id = taskList.stream().mapToLong(Task::getId)
+                  .max().orElse(0);
+        taskList.add(new Task((id + 1), taskName));
         return id;
     }
 
-    public void deleteTask(int id) {
+    public void deleteTask(Long id) {
         taskList.remove(id);
         // Синхронизация id в списке с id в Task
         for (int i = 0; i < taskList.size(); i++) {
-            taskList.get(i).setId(i + 1);
+            taskList.get(i).setId((long) (i + 1));
         }
     }
 
 
-    public void editTask(int id, String name) {
-        taskList.get(id).setName(name);
+    public void editTask(Long id, String name) {
+        taskList.get(id.intValue()).setName(name);
     }
 
 
-    public void toggleTask(int id) {
-        taskList.get(id).toggle();
+    public void toggleTask(Long id) {
+        taskList.get(id.intValue()).toggle();
     }
 }
