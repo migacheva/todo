@@ -6,11 +6,11 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="task")
+@Table(name="t_task")
 public class Task {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @Column(name="name", length=50, nullable=false)
     private String name;

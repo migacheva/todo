@@ -1,0 +1,126 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-master.yaml
+  - changeSet:
+      id: 1
+      author: anna_kovalchuk
+      changes:
+        - createTable:
+            tableName: t_user
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(550)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: t_role
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+        - createTable:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: id_name
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_t_user_id
+                    references: t_user(id)
+                    nullable: false
+              - column:
+                  name: id_role
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_t_role_id
+                    references: t_role(id)
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: anna_kovalchuk
+      comment: "Create admin user"
+      changes:
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: username
+                  value: "admin"
+              - column:
+                  name: password
+                  value: "$2a$12$RTqNWdtXrgom5dFAvFnmme.2yESow7nPcjOazIQH/nYexrNaArKam"
+        - insert:
+            tableName: t_role
+            columns:
+              - column:
+                  name: name
+                  value: "ADMIN"
+        - insert:
+            tableName: t_role
+            columns:
+              - column:
+                  name: name
+                  value: "KOT"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: id_name
+                  value: 1
+              - column:
+                  name: id_role
+                  value: 1
+  - changeSet:
+      id: 3
+      author: anna_kovalchuk
+      changes:
+        - createTable:
+            tableName: t_task
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: done
+                  type: boolean
+                  constraints:
+                    nullable: false
