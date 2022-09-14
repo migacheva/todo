@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.kovalchuk.task.model.Task;
+import ru.kovalchuk.user.model.User;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             @Param("name") String name,
             @Param("id") Long id
     );
+
+    List<Task> findAllTasksByUser(User user);
 }

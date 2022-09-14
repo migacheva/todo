@@ -124,3 +124,18 @@ databaseChangeLog:
                   type: boolean
                   constraints:
                     nullable: false
+  - changeSet:
+      id: 4
+      author: anna_kovalchuk
+      comment: "add column user for task"
+      changes:
+        - addColumn:
+            tableName: t_task
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_t_user_id
+                    references: t_user(id)
+                    nullable: false

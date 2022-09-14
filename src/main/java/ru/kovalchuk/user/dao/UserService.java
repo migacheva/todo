@@ -55,7 +55,7 @@ public class UserService implements UserDetailsService {
         User user = new User();
         user.setUsername(userRs.getNameUser());
         // Collections.singleton - т.к. роли - массив, подразумевается что у пользователя может быть несколько ролей
-        user.setRoles(Collections.singleton(roleRepository.findByName("kot")));
+        user.setRoles(Collections.singleton(roleRepository.findByName("KOT")));
         user.setPassword(bCryptPasswordEncoder.encode(userRs.getPassUser()));
         userRepository.save(user);
         return true;

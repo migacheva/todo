@@ -58,6 +58,7 @@
 2) ввести cmd + enter
 3) выполнить команду psql mydb postgres
 4) далее запросы в базу
+5) password = q
 
 
 # Команды для удаления схемы и создания заново
@@ -65,3 +66,9 @@
 - create schema public authorization postgres;
 - grant all on schema public to postgres; (для выдачи прав постгресу)
 - grant all on schema public to public; (для выдачи прав схеме)
+
+# fast scripts
+drop schema public cascade;
+create schema public authorization postgres;
+grant all on schema public to postgres;
+grant all on schema public to public;

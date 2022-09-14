@@ -3,6 +3,7 @@ package ru.kovalchuk.task.dao;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import ru.kovalchuk.task.model.Task;
+import ru.kovalchuk.user.model.User;
 
 import java.util.List;
 
@@ -18,48 +19,49 @@ public class TaskServiceImpl implements TaskDao{
 
 
     @Override
-    public Task getById(Long id) {
+    public Task getById(Long id, User user) {
         return taskRepository.getReferenceById(id);
     }
 
     @Override
-    public List<Task> getAllTasks() {
-        return taskRepository.findAll();
+    public List<Task> getAllTasks(User user) {
+        return taskRepository.findAllTasksByUser(user);
     }
 
     @Override
-    public List<Task> getProcessingTasks() {
+    public List<Task> getProcessingTasks(User user) {
         return null;
     }
 
     @Override
-    public List<Task> findByNameSubstring(String value) {
+    public List<Task> findByNameSubstring(String value, User user) {
         return taskRepository.findByNameContains(value);
     }
 
     @Override
-    public Long addTask(String taskName) {
+    public Long addTask(String taskName, User user) {
         Task newTask = new Task();
         newTask.setName(taskName);
+        newTask.setUser(user);
         newTask = taskRepository.save(newTask);
         return newTask.getId();
     }
 
     @Override
-    public void deleteTask(Long id) {
+    public void deleteTask(Long id, User user) {
         taskRepository.deleteById(id);
     }
 
     @Override
-    public void editTask(Long id, String name) {
-        Task editTask = getById(id);
+    public void editTask(Long id, String name, User user) {
+        Task editTask = getById(id, user);
         editTask.setName(name);
         taskRepository.save(editTask);
     }
 
     @Override
-    public void toggleTask(Long id) {
-        Task toggleTask = getById(id);
+    public void toggleTask(Long id, User user) {
+        Task toggleTask = getById(id, user);
         toggleTask.toggle();
         taskRepository.save(toggleTask);
     }

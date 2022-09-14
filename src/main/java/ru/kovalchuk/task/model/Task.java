@@ -1,6 +1,7 @@
 package ru.kovalchuk.task.model;
 
 import lombok.Data;
+import ru.kovalchuk.user.model.User;
 
 import javax.persistence.*;
 
@@ -16,6 +17,9 @@ public class Task {
     private String name;
     @Column(name="done", nullable=false)
     private boolean done;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     public Task(Long id, String name) {
         this.id = id;
