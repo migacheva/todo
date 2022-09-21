@@ -2,6 +2,7 @@ package ru.kovalchuk.task.dao;
 
 import org.springframework.stereotype.Component;
 import ru.kovalchuk.task.model.Task;
+import ru.kovalchuk.task.model.TaskFilter;
 import ru.kovalchuk.user.model.User;
 
 import java.util.ArrayList;
@@ -21,28 +22,8 @@ public class TaskDaoImpl implements TaskDao {
         return taskList.get(id.intValue());
     }
 
-    public List<Task> getAllTasks(User user) {
+    public List<Task> getTasks(TaskFilter filter) {
         return taskList;
-    }
-
-    public List<Task> getProcessingTasks(User user) {
-        List<Task> result = new ArrayList<>();
-        for (int i=0; i<taskList.size(); i++){
-            if (!taskList.get(i).isDone()){
-                result.add(getById((long) i, user));
-            }
-        }
-        return result;
-    }
-
-    public List<Task> findByNameSubstring(String value, User user) {
-        List<Task> result = new ArrayList<>();
-         for (int i = 0; i < taskList.size(); i++) {
-             if (taskList.get(i).getName().contains(value)) {
-                 result.add(getById((long) i, user));
-             }
-         }
-        return result;
     }
 
     public Long addTask(String taskName, User user) {

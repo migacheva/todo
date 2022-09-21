@@ -3,6 +3,7 @@ package ru.kovalchuk.task.dao;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import ru.kovalchuk.task.model.Task;
+import ru.kovalchuk.task.model.TaskFilter;
 import ru.kovalchuk.user.model.User;
 
 import java.util.List;
@@ -24,18 +25,8 @@ public class TaskServiceImpl implements TaskDao{
     }
 
     @Override
-    public List<Task> getAllTasks(User user) {
-        return taskRepository.findAllTasksByUser(user);
-    }
-
-    @Override
-    public List<Task> getProcessingTasks(User user) {
-        return null;
-    }
-
-    @Override
-    public List<Task> findByNameSubstring(String value, User user) {
-        return taskRepository.findByNameContains(value);
+    public List<Task> getTasks(TaskFilter filter) {
+        return taskRepository.getTasks(filter);
     }
 
     @Override

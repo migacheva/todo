@@ -10,6 +10,7 @@ import ru.kovalchuk.task.dao.TaskDao;
 import ru.kovalchuk.task.model.AddTaskRequest;
 import ru.kovalchuk.task.model.EditTaskRequest;
 import ru.kovalchuk.task.model.Task;
+import ru.kovalchuk.task.model.TaskFilter;
 import ru.kovalchuk.user.model.User;
 
 import javax.validation.Valid;
@@ -27,14 +28,14 @@ public class TaskController {
 
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks(@RequestParam(value = "dataSearch", required = false) String dataSearch,
+                                                  @RequestParam(value = "processingTask", required = false) boolean processingTask,
                                                   @AuthenticationPrincipal User user) {
         List<Task> result;
-        if (dataSearch == null){
-            result = taskDao.getAllTasks(user);
-        }
-        else{
-            result = taskDao.findByNameSubstring(dataSearch, user);
-        }
+        TaskFilter filter = new TaskFilter();
+        filter.setUserId(user.getId());
+        filter.setOnlyProcessing(processingTask);
+        filter.setSearchString(dataSearch);
+        result = taskDao.getTasks(filter);
         return ResponseEntity.ok(result);
     }
 

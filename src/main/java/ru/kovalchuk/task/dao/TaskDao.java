@@ -1,6 +1,7 @@
 package ru.kovalchuk.task.dao;
 
 import ru.kovalchuk.task.model.Task;
+import ru.kovalchuk.task.model.TaskFilter;
 import ru.kovalchuk.user.model.User;
 
 import java.util.List;
@@ -9,11 +10,7 @@ public interface TaskDao {
 
     Task getById(Long id, User user);
 
-    List<Task> getAllTasks(User user);
-
-    List<Task> getProcessingTasks(User user);
-
-    List<Task> findByNameSubstring(String value, User user);
+    List<Task> getTasks(TaskFilter filter);
 
     Long addTask(String taskName, User user);
 

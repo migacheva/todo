@@ -11,7 +11,7 @@ import ru.kovalchuk.user.model.User;
 import java.util.List;
 
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Long> {
+public interface TaskRepository extends JpaRepository<Task, Long>, CustomTaskRepository {
     List<Task> findByNameContains(String letters);
 
     @Modifying
