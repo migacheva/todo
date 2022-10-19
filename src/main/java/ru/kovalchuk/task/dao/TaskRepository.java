@@ -3,6 +3,7 @@ package ru.kovalchuk.task.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.kovalchuk.task.model.Task;
@@ -11,7 +12,7 @@ import ru.kovalchuk.user.model.User;
 import java.util.List;
 
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Long>, CustomTaskRepository {
+public interface TaskRepository extends JpaRepository<Task, Long>, QuerydslPredicateExecutor<Task> {
     List<Task> findByNameContains(String letters);
 
     @Modifying

@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.kovalchuk.user.model.AddUserRequest;
-import ru.kovalchuk.user.model.Role;
 import ru.kovalchuk.user.model.User;
 
 import java.util.Collections;

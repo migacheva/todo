@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class TaskDaoImpl implements TaskDao {
+public class InMemoryTaskServiceImpl implements TaskService {
 
-    public TaskDaoImpl(){
+    public InMemoryTaskServiceImpl(){
         taskList = new ArrayList<>();
     }
 

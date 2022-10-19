@@ -6,7 +6,7 @@ import ru.kovalchuk.user.model.User;
 
 import java.util.List;
 
-public interface TaskDao {
+public interface TaskService {
 
     Task getById(Long id, User user);
 

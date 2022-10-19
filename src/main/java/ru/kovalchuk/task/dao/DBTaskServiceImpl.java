@@ -1,20 +1,23 @@
 package ru.kovalchuk.task.dao;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+import ru.kovalchuk.task.model.QTask;
 import ru.kovalchuk.task.model.Task;
 import ru.kovalchuk.task.model.TaskFilter;
 import ru.kovalchuk.user.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 @Primary
-public class TaskServiceImpl implements TaskDao{
+public class DBTaskServiceImpl implements TaskService {
 
     public final TaskRepository taskRepository;
 
-    public TaskServiceImpl(TaskRepository taskRepository){
+    public DBTaskServiceImpl(TaskRepository taskRepository){
         this.taskRepository = taskRepository;
     }
 
@@ -26,7 +29,17 @@ public class TaskServiceImpl implements TaskDao{
 
     @Override
     public List<Task> getTasks(TaskFilter filter) {
-        return taskRepository.getTasks(filter);
+        QTask qTask = QTask.task;
+        BooleanExpression taskQuery = qTask.user().id.eq(filter.getUserId());
+        if (filter.isOnlyProcessing()){
+            taskQuery = taskQuery.and(qTask.done.eq(false));
+        }
+        if (filter.getSearchString() != null){
+            taskQuery = taskQuery.and(qTask.name.like(String.format("%%%s%%", filter.getSearchString())));
+        }
+        List<Task> result = new ArrayList<>();
+        taskRepository.findAll(taskQuery).forEach(result::add);
+        return result;
     }
 
     @Override
