@@ -3,6 +3,7 @@ package ru.kovalchuk.task.dao;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+import ru.kovalchuk.common.Exception.NoEntityException;
 import ru.kovalchuk.task.model.QTask;
 import ru.kovalchuk.task.model.Task;
 import ru.kovalchuk.task.model.TaskFilter;
@@ -24,7 +25,10 @@ public class DBTaskServiceImpl implements TaskService {
 
     @Override
     public Task getById(Long id, User user) {
-        return taskRepository.getReferenceById(id);
+        QTask qTask = QTask.task;
+        BooleanExpression taskQuery = qTask.id.eq(id);
+        taskQuery = taskQuery.and(qTask.user().id.eq(user.getId()));
+        return taskRepository.findOne(taskQuery).orElseThrow(() -> new NoEntityException(id));
     }
 
     @Override
@@ -38,7 +42,8 @@ public class DBTaskServiceImpl implements TaskService {
             taskQuery = taskQuery.and(qTask.name.like(String.format("%%%s%%", filter.getSearchString())));
         }
         List<Task> result = new ArrayList<>();
-        taskRepository.findAll(taskQuery).forEach(result::add);
+//        taskRepository.findAll(taskQuery).forEach(result::add);
+        taskRepository.findAll(taskQuery).forEach(elem -> result.add(elem));
         return result;
     }
 
