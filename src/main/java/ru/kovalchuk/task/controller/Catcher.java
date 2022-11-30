@@ -15,8 +15,8 @@ import javax.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class Catcher {
-    @ExceptionHandler({ConstraintViolationException.class})
-    public ResponseEntity<ValidationError> handleException(ConstraintViolationException e) {
+    @ExceptionHandler({ConstraintViolationException.class, NoEntityException.class})
+    public ResponseEntity<ValidationError> handleException(RuntimeException e) {
         /** ConstraintViolationException если не прошла валиадция самого значения метода **/
         ValidationError response = new ValidationError(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -35,12 +35,5 @@ public class Catcher {
         }
         ValidationError response = new ValidationError(sb.toString());
         return new ResponseEntity<>(response, HttpStatus.I_AM_A_TEAPOT);
-    }
-
-    @ExceptionHandler({NoEntityException.class})
-    public ResponseEntity<ValidationError> noEntityException(NoEntityException e) {
-        /** noEntityException если не найдены данные **/
-        ValidationError response = new ValidationError(e.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
