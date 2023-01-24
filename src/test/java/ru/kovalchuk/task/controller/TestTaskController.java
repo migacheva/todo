@@ -1,6 +1,6 @@
 package ru.kovalchuk.task.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import liquibase.repackaged.org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import ru.kovalchuk.Helper;
 import ru.kovalchuk.task.dao.TaskMapper;
 import ru.kovalchuk.task.dao.TaskService;
 import ru.kovalchuk.task.model.AddTaskRequest;
@@ -35,23 +36,67 @@ public class TestTaskController {
 
     @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
     @Test
-    public void testAddTask() throws Exception{
-        given(service.getById(any(), any())).willReturn(new Task(333L, "Olalaaaa is it a new task"));
+    public void testAddTask() throws Exception {
         AddTaskRequest testAddTask = new AddTaskRequest();
         testAddTask.setNameTask("Olalaaaa is it a new task");
         mockMvc.perform(MockMvcRequestBuilders
                         .post("/task")
-                        .content(asJsonString(testAddTask))
+                        .content(Helper.asJsonString(testAddTask))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
     }
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
+    @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+    @Test
+    public void testAddTaskNotBlank() throws Exception {
+        AddTaskRequest testAddTask = new AddTaskRequest();
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/task")
+                        .content(Helper.asJsonString(testAddTask))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isIAmATeapot());
     }
+
+    @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+    @Test
+    public void testAddTaskCheckLength() throws Exception {
+        AddTaskRequest testAddTask = new AddTaskRequest();
+        testAddTask.setNameTask(RandomStringUtils.random(26, true, true));
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/task")
+                        .content(Helper.asJsonString(testAddTask))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isIAmATeapot());
+    }
+
+    @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+    @Test
+    public void testGetTask() throws Exception {
+        given(service.getById(any(), any())).willReturn(new Task(333L, "Olalaaaa is it a new task"));
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/task/{id}", 333L))
+                .andExpect(status().isOk());
+    }
+
+    @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+    @Test
+    public void testGetTaskBadId() throws Exception {
+        given(service.getById(any(), any())).willReturn(new Task(333L, "Olalaaaa is it a new task"));
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/task/{id}", "@qqq"))
+                .andExpect(status().isBadRequest());
+    }
+
+//    @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+//    @Test
+//    public void testGetAllTask() throws Exception {
+//        given(service.getById(any(), any())).willReturn(new Task(333L, "Olalaaaa is it a new task"));
+//        mockMvc.perform(MockMvcRequestBuilders
+//                        .get("/task"))
+//                .andExpect(status().isOk());
+//    }
 }
 
