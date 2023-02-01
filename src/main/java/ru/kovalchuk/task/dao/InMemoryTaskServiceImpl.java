@@ -22,7 +22,7 @@ public class InMemoryTaskServiceImpl implements TaskService {
         return taskList.get(id.intValue());
     }
 
-    public List<Task> getTasks(TaskFilter filter) {
+    public List<Task> getTasks(User user, String dataSearch, boolean processingTask) {
         return taskList;
     }
 

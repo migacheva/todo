@@ -31,11 +31,7 @@ public class TaskController {
     public ResponseEntity<List<TaskDTO>> getAllTasks(@RequestParam(value = "dataSearch", required = false) String dataSearch,
                                                   @RequestParam(value = "processingTask", required = false) boolean processingTask,
                                                   @AuthenticationPrincipal User user) {
-        TaskFilter filter = new TaskFilter();
-        filter.setUserId(user.getId());
-        filter.setOnlyProcessing(processingTask);
-        filter.setSearchString(dataSearch);
-        List<Task> res = taskService.getTasks(filter);
+        List<Task> res = taskService.getTasks(user, dataSearch, processingTask);
         // List<TaskDTO> result = res.stream()
         //         .map((task) -> taskMapper.toDTO(task))
         //         .collect(Collectors.toList());

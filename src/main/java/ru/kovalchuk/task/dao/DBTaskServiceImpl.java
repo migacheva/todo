@@ -32,14 +32,14 @@ public class DBTaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> getTasks(TaskFilter filter) {
+    public List<Task> getTasks(User user, String dataSearch, boolean processingTask) {
         QTask qTask = QTask.task;
-        BooleanExpression taskQuery = qTask.user().id.eq(filter.getUserId());
-        if (filter.isOnlyProcessing()){
+        BooleanExpression taskQuery = qTask.user().id.eq(user.getId());
+        if (processingTask){
             taskQuery = taskQuery.and(qTask.done.eq(false));
         }
-        if (filter.getSearchString() != null){
-            taskQuery = taskQuery.and(qTask.name.like(String.format("%%%s%%", filter.getSearchString())));
+        if (dataSearch != null){
+            taskQuery = taskQuery.and(qTask.name.like(String.format("%%%s%%", dataSearch)));
         }
         List<Task> result = new ArrayList<>();
 //        taskRepository.findAll(taskQuery).forEach(result::add);

@@ -10,7 +10,7 @@ public interface TaskService {
 
     Task getById(Long id, User user);
 
-    List<Task> getTasks(TaskFilter filter);
+    List<Task> getTasks(User user, String dataSearch, boolean processingTask);
 
     Long addTask(String taskName, User user);
 

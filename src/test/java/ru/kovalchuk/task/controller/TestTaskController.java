@@ -15,10 +15,15 @@ import ru.kovalchuk.Helper;
 import ru.kovalchuk.task.dao.TaskMapper;
 import ru.kovalchuk.task.dao.TaskService;
 import ru.kovalchuk.task.model.AddTaskRequest;
+import ru.kovalchuk.task.model.EditTaskRequest;
 import ru.kovalchuk.task.model.Task;
 
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -90,13 +95,61 @@ public class TestTaskController {
                 .andExpect(status().isBadRequest());
     }
 
-//    @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
-//    @Test
-//    public void testGetAllTask() throws Exception {
-//        given(service.getById(any(), any())).willReturn(new Task(333L, "Olalaaaa is it a new task"));
-//        mockMvc.perform(MockMvcRequestBuilders
-//                        .get("/task"))
-//                .andExpect(status().isOk());
-//    }
+    @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+    @Test
+    public void testGetAllTask() throws Exception {
+        given(service.getTasks(any(), any(), anyBoolean())).willReturn(List.of(new Task(333L, "Olalaaaa is it a new task")));
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/task"))
+                .andExpect(status().isOk());
+    }
+
+    @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+    @Test
+    public void testDeleteTask() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/task/{id}", 333L))
+                .andExpect(status().isNoContent());
+    }
+
+    @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+    @Test
+    public void testEditTaskName() throws Exception {
+        EditTaskRequest testEditName = new EditTaskRequest();
+        testEditName.setNewTaskName("Ola is it a new edit task");
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/task/{id}", 333L)
+                        .content(Helper.asJsonString(testEditName))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+    }
+
+    @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+    @Test
+    public void testEditTaskWithLongName() throws Exception {
+        EditTaskRequest testEditName = new EditTaskRequest();
+        testEditName.setNewTaskName("Olalaaaa is it a new edit task");
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/task/{id}", 333L)
+                        .content(Helper.asJsonString(testEditName))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isIAmATeapot());
+    }
+
+    @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+    @Test
+    public void testToggleTask() throws Exception {
+        EditTaskRequest testEditName = new EditTaskRequest();
+        testEditName.setChangeStatus(false);
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/task/{id}", 333L)
+                        .content(Helper.asJsonString(testEditName))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+    }
+
 }
 
