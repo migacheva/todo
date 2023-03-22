@@ -23,7 +23,8 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -42,6 +43,7 @@ public class TestTaskController {
     @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
     @Test
     public void testAddTask() throws Exception {
+        given(service.addTask(any(), any())).willReturn(333L);
         AddTaskRequest testAddTask = new AddTaskRequest();
         testAddTask.setNameTask("Olalaaaa is it a new task");
         mockMvc.perform(MockMvcRequestBuilders
@@ -49,7 +51,10 @@ public class TestTaskController {
                         .content(Helper.asJsonString(testAddTask))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andExpect(header().string("location", "/task/333"));
+        verify(service, times(1)).addTask(anyString(), any());
+
     }
 
     @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")

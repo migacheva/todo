@@ -136,6 +136,6 @@ databaseChangeLog:
                   name: user_id
                   type: BIGINT
                   constraints:
-                    foreignKeyName: fk_t_user_id
+                    foreignKeyName: fk_task_user_id
                     references: t_user(id)
                     nullable: false
